@@ -1,0 +1,26 @@
+---
+ - hosts: dbservers
+   name: Playbook to check dir , if exists then display content else ignore error.
+   become: true
+   gather_facts: false
+   tasks:
+
+     - name: task to check if /usr/local/
+       command: ls /usr/local/
+       register: checkdir1
+       ignore_errors: yes
+     - debug: var=checkdir1
+
+
+     - name: task to check if /usr/loc
+       command: ls /usr/loc
+       register: checkdir2
+       ignore_errors: yes
+     - debug: var=checkdir2
+
+
+     - name: task to check if /usr/local/tomcat_webserver/
+       command: ls /usr/local/tomcat_webserver/
+       register: checkdir3
+       ignore_errors: yes
+     - debug: var=checkdir3
