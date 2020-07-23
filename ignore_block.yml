@@ -1,0 +1,36 @@
+---
+ - hosts: dbservers
+   name: Playbook --> ignore error but by block to avoid writing ingore_error for all tasks.
+   become: true
+   gather_facts: false
+   tasks:
+    - block:
+         
+       - name: install tree
+         apt: name=tree state=latest
+
+       - name: check /usr/local/ exists
+         command: tree /usr/local
+         register: tree1
+       - debug: var=tree1
+
+       - name: check /usr/col
+         command: tree /usr/col
+         register: tree2
+       - debug: var=tree2
+
+
+       - name: check if /usr/local/tomcat_webserver/
+         command: ls /etc/ansible
+         register: tree3
+       - debug: var=tree3
+
+
+         
+      ignore_errors: yes
+
+
+      #       - name: check if /usr/local/tomcat_webserver/
+      #  command: ls /etc/ansible
+      #  register: tree3
+      # - debug: var=tree3

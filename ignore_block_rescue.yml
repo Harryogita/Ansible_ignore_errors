@@ -1,0 +1,25 @@
+---
+ - hosts: dbservers
+   name: Playbook for error handling by block,rescue,finally
+   become: true
+   gather_facts: false
+   tasks:
+
+       - block:
+
+               - name: list /etc/ansible
+                 command: ls /etc/ansible
+
+               - name: list /etc/dirharry
+                 command: ls /etc/
+                 #    command: ls /etc/dirharry
+         rescue:
+
+               - name: list /usr/local
+                 command: ls /usr/local
+
+                 # finally:
+
+               - name: list /usr/local/tomcat_webserver
+                 command: ls /usr/
+
